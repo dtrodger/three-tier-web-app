@@ -6,7 +6,7 @@ before_install:
   - docker build -t dtrodger/react-test -f ./web_client/Dockerfile.dev ./web_client
 
 scripts:
-  - docker run dtrodger/react-test npm test -- --coverage
+  - docker run -e CI=true USERNAME/react-test npm test
 
 after_success:
   - docker build -t dtrodger/ttwa-web-client ./web_client
