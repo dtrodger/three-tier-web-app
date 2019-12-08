@@ -9,11 +9,11 @@ scripts:
   - docker run -e CI=true dtrodger/react-test npm test
 
 after_success:
+  - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
   - docker build -t dtrodger/ttwa-web-client ./web_client
   - docker build -t dtrodger/ttwa-web-server ./web_server
   - docker build -t dtrodger/ttwa-proxy ./proxy
   - docker build -t dtrodger/ttwa-worker ./worker
-  - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
   - docker push dtrodger/ttwa-web-client
   - docker push dtrodger/ttwa-web-server
   - docker push dtrodger/ttwa-proxy
