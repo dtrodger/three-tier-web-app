@@ -1,0 +1,68 @@
+version: "3"
+
+services:
+
+  postgres:
+    container_name: ttwa-postgres
+    image: postgres:latest
+
+  proxy:
+    container_name: ttwa-proxy
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./proxy
+    ports:
+      - "5000:80"
+    restart: always
+    depends_on:
+      - web_server
+      - web_client
+
+  redis:
+    container_name: ttwa-redis
+    image: redis:latest
+
+  web_server:
+    container_name: ttwa-web-server
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./web_server
+    volumes:
+      - /web_server/node_modules
+      - ./web_server:/web_server
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
+    depends_on:
+      - postgres
+      - redis
+
+  web_client:
+    container_name: ttwa-web-client
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./web_client
+    volumes:
+      - /web_client/node_modules
+      - ./web_client:/web_client
+    depends_on:
+      - web_server
+
+  worker:
+    container_name: ttwa-worker
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes:
+      - /worker/node_modules
+      - ./worker:/worker
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
