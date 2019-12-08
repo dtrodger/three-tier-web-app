@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t dtrodger/react-test -f ./web_client/Dockerfile.dev ./web_client
+
+scripts:
+  - docker run dtrodger/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t dtrodger/ttwa-web-client ./web_client
+  - docker build -t dtrodger/ttwa-web-server ./web_server
+  - docker build -t dtrodger/ttwa-proxy ./proxy
+  - docker build -t dtrodger/ttwa-worker ./worker
+  - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
+  - docker push dtrodger/ttwa-web-client
+  - docker push dtrodger/ttwa-web-server
+  - docker push dtrodger/ttwa-proxy
+  - docker push dtrodger/ttwa-worker
