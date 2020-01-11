@@ -5,24 +5,28 @@
       "name": "ttwa-web-client",
       "image": "dtrodger/ttwa-web-client",
       "hostname": "web_client",
+      "memory": 128,
       "essential": false
     },
     {
       "name": "ttwa-web-server",
       "image": "dtrodger/ttwa-web-server",
       "hostname": "web_server",
+      "memory": 128,
       "essential": false
     },
     {
       "name": "ttwa-worker",
       "image": "dtrodger/ttwa-worker",
       "hostname": "worker",
+      "memory": 128,
       "essential": false
     },
     {
       "name": "ttwa-proxy",
       "image": "dtrodger/ttwa-proxy",
       "hostname": "proxy",
+      "memory": 128,
       "essential": true,
       "portMappings": [
         {
