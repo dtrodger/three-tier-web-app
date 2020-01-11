@@ -19,3 +19,16 @@ after_success:
   - docker push dtrodger/ttwa-web-server
   - docker push dtrodger/ttwa-proxy
   - docker push dtrodger/ttwa-worker
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "kubernetes-training"
+  env: "KubernetesTraining-env-1"
+  bucket_name: "elasticbeanstalk-us-east-1-003903245551"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
