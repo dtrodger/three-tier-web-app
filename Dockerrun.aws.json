@@ -2,16 +2,16 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-      "name": "web_client",
+      "name": "webclient",
       "image": "dtrodger/ttwa-web-client",
-      "hostname": "web_client",
+      "hostname": "webclient",
       "memory": 128,
       "essential": false
     },
     {
-      "name": "web_server",
+      "name": "webserver",
       "image": "dtrodger/ttwa-web-server",
-      "hostname": "web_server",
+      "hostname": "webserver",
       "memory": 128,
       "essential": false
     },
@@ -35,8 +35,8 @@
         }
       ],
       "links": [
-        "web_server",
-        "web_client"
+        "webserver",
+        "webclient"
       ]
     }
   ]

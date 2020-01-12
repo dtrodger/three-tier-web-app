@@ -22,7 +22,7 @@ services:
     container_name: ttwa-redis
     image: redis:latest
 
-  web_server:
+  webserver:
     container_name: ttwa-web-server
     build:
       dockerfile: Dockerfile.dev
@@ -42,7 +42,7 @@ services:
       - postgres
       - redis
 
-  web_client:
+  webclient:
     container_name: ttwa-web-client
     build:
       dockerfile: Dockerfile.dev
