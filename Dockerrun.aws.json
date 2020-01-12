@@ -35,8 +35,8 @@
         }
       ],
       "links": [
-        "ttwa-web-server",
-        "ttwa-web-client"
+        "web_server",
+        "web_client"
       ]
     }
   ]
