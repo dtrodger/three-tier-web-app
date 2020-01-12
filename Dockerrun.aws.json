@@ -2,28 +2,28 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-      "name": "ttwa-web-client",
+      "name": "webclient",
       "image": "dtrodger/ttwa-web-client",
-      "hostname": "web_client",
+      "hostname": "webclient",
       "memory": 128,
       "essential": false
     },
     {
-      "name": "ttwa-web-server",
+      "name": "webserver",
       "image": "dtrodger/ttwa-web-server",
-      "hostname": "web_server",
+      "hostname": "webserver",
       "memory": 128,
       "essential": false
     },
     {
-      "name": "ttwa-worker",
+      "name": "worker",
       "image": "dtrodger/ttwa-worker",
       "hostname": "worker",
       "memory": 128,
       "essential": false
     },
     {
-      "name": "ttwa-proxy",
+      "name": "proxy",
       "image": "dtrodger/ttwa-proxy",
       "hostname": "proxy",
       "memory": 128,
