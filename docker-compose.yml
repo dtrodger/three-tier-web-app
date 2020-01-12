@@ -15,8 +15,8 @@ services:
       - "5000:80"
     restart: always
     depends_on:
-      - web_server
-      - web_client
+      - webserver
+      - webclient
 
   redis:
     container_name: ttwa-redis
@@ -51,7 +51,7 @@ services:
       - /web_client/node_modules
       - ./web_client:/web_client
     depends_on:
-      - web_server
+      - webserver
 
   worker:
     container_name: ttwa-worker
