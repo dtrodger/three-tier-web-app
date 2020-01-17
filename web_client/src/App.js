@@ -10,7 +10,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <header className="App-header">
-            <h1 className="App-title">Box Technology Consulting Three Tier Web App</h1>
+            <h1 className="App-title">Foo</h1>
             <Link to="/">Fibonacci Calculator</Link>
             <Link to="/otherpage">Other Page</Link>
           </header>
