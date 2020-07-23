@@ -1,30 +1,21 @@
-sudo: required
-
 services:
   - docker
 
 before_install:
-  - docker build -t dtrodger/react-test -f ./web_client/Dockerfile.dev ./web_client
+  - docker build -t box-consulting/react-test -f ./web_client/Dockerfile.dev ./web_client
 
 scripts:
-  - docker run -e CI=true dtrodger/react-test npm test
+  - docker run -e CI=true box-consulting/react-test npm test
 
 after_success:
   - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
-  - docker build -t dtrodger/ttwa-web-client ./web_client
-  - docker build -t dtrodger/ttwa-web-server ./web_server
-  - docker build -t dtrodger/ttwa-proxy ./proxy
-  - docker build -t dtrodger/ttwa-worker ./worker
-  - docker push dtrodger/ttwa-web-client
-  - docker push dtrodger/ttwa-web-server
-  - docker push dtrodger/ttwa-proxy
-  - docker push dtrodger/ttwa-worker
+  - docker build -t box-consulting/ttwa-web-client ./worker
+  - docker push box-consulting/ttwa-web-client
 
 deploy:
-  edge: true
   provider: elasticbeanstalk
   region: "us-east-1"
-  app: "kubernetes-training"
+  app: "box-consulting-web-client"
   env: "KubernetesTraining-env-1"
   bucket_name: "elasticbeanstalk-us-east-1-003903245551"
   bucket_path: "docker-react"
